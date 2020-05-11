@@ -1,0 +1,29 @@
+.department {
+  width: 90%;
+  padding: 10px;
+  margin: 20px auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 5px;
+  color: #fff;
+  display: flex;
+  flex-flow: column wrap; }
+  .department .name {
+    font-weight: 500; }
+  .department .description {
+    font-weight: 300; }
+  .department button {
+    margin: 16px 0px;
+    align-self: center;
+    box-shadow: 2px 2px 0px #ccc;
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: 500;
+    background-color: #8488aa;
+    transition-duration: 0.3s; }
+    .department button:active {
+      box-shadow: none;
+      transform: translate(2px, 2px); }
+    .department button:focus {
+      outline: none; }
+    .department button:hover {
+      background-color: #A2A6C8; }
