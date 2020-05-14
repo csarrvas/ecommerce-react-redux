@@ -2,7 +2,7 @@ import {
   MAKE_A_SEARCH,
   FETCH_CATEGORIES,
   RESET
-} from '../types';
+} from '../../types';
 
 export default (state = { searching: false, wantedProductsId: [] }, action) => {
   switch (action.type) {

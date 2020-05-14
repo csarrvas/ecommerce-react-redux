@@ -3,19 +3,20 @@ import {
   FETCH_CATEGORIES,
   MAKE_A_SEARCH,
   RESET
-} from '../types';
+} from '../../types';
 
-export default (state = { countProducts: 0, products: [] }, action) => {
+export default (state = { countProducts: 0, actualPage: 0, products: [] }, action) => {
   switch (action.type) {
     case MAKE_A_SEARCH:
     case FETCH_PRODUCTS:
       return {
         countProducts: action.payload.countProducts,
+        actualPage: action.payload.actualPage,
         products: action.payload.products
       };
     case FETCH_CATEGORIES:
     case RESET:
-      return { countProducts: 0, products: [] }
+      return { countProducts: 0, actualPage: 0, products: [] }
     default:
       return state;
   }

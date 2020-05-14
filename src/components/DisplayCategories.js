@@ -1,6 +1,4 @@
 import React, { Fragment } from 'react';
-import { connect } from 'react-redux';
-import { fetchProductsByCategory } from '../actions';
 import './css/cardsStyle.css';
 
 const DisplayCategories = ({ categories, fetchProductsByCategory }) => {
@@ -27,10 +25,4 @@ const DisplayCategories = ({ categories, fetchProductsByCategory }) => {
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    categories: state.categories
-  };
-}
-
-export default connect(mapStateToProps, { fetchProductsByCategory })(DisplayCategories);
+export default DisplayCategories;

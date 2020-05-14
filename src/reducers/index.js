@@ -1,13 +1,14 @@
 import { combineReducers } from 'redux';
-import departmentsReducer from './departmentsReducer';
-import departmentSelectedReducer from './departmentSelectedReducer';
-import categoriesReducer from './categoriesReducer';
-import categorySelectedReducer from './categorySelectedReducer';
-import productsReducer from './productsReducer';
-import productSelectedReducer from './productSelectedReducer';
-import allProductsNameReducer from './allProductsNameReducer';
-import searchReducer from './searchReducer';
-import reviewsReducer from './reviewsReducer';
+import departmentsReducer from './seeTheStoreReducers/departmentsReducer';
+import departmentSelectedReducer from './seeTheStoreReducers/departmentSelectedReducer';
+import categoriesReducer from './seeTheStoreReducers/categoriesReducer';
+import categorySelectedReducer from './seeTheStoreReducers/categorySelectedReducer';
+import productsReducer from './seeTheStoreReducers/productsReducer';
+import productSelectedReducer from './seeTheStoreReducers/productSelectedReducer';
+import allProductsNameReducer from './seeTheStoreReducers/allProductsNameReducer';
+import searchReducer from './seeTheStoreReducers/searchReducer';
+import reviewsReducer from './seeTheStoreReducers/reviewsReducer';
+import loadingReducer from './loadingReducer';
 
 export default combineReducers({
   departments: departmentsReducer,
@@ -18,5 +19,6 @@ export default combineReducers({
   productSelected: productSelectedReducer,
   allProductsName: allProductsNameReducer,
   search: searchReducer,
-  reviews: reviewsReducer
+  reviews: reviewsReducer,
+  loading: loadingReducer
 });

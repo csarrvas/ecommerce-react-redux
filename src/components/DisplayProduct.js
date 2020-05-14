@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import './css/cardsStyle.css';
 import './css/displayProduct.css';
 
@@ -43,11 +42,4 @@ const DisplayProduct = ({ product, reviews }) => {
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    product: state.products.products.filter(product => product.product_id === state.productSelected)[0],
-    reviews: state.reviews
-  };
-}
-
-export default connect(mapStateToProps)(DisplayProduct);
+export default DisplayProduct;

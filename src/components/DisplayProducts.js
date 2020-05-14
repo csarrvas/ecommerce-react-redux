@@ -1,11 +1,20 @@
 import React, { Fragment } from 'react';
-import { connect } from 'react-redux';
-import { fetchProductsBySearch, fetchProductsByCategory, selectProduct } from '../actions';
 import { printMessage } from '../helpers/ui';
 import './css/cardsStyle.css';
 import './css/displayProducts.css';
 
-const DisplayProducts = ({ searching, wantedProductsId, categorySelected, countProducts, products, fetchProductsBySearch, fetchProductsByCategory, selectProduct }) => {
+const DisplayProducts = (props) => {
+  const {
+    products: productsState,
+    categorySelected,
+    search,
+    fetchProductsByCategory,
+    fetchProductsBySearch,
+    selectProduct
+  } = props
+  const { products, countProducts, actualPage } = productsState;
+  const { searching, wantedProductsId } = search
+
   const numberOfPages = countProducts !== 0 ? Math.ceil(countProducts / 10) : 0;
 
   const displayPagination = (numberOfPages) => {
@@ -17,8 +26,8 @@ const DisplayProducts = ({ searching, wantedProductsId, categorySelected, countP
       <button
         key={`page-${page}`}
         data-id={page}
-        className="page"
-        onClick={changePage}
+        className={`page ${page === actualPage ? 'selected' : ''}`}
+        onClick={ page !== actualPage ? changePage : null}
       >
         {page}
       </button>
@@ -46,6 +55,8 @@ const DisplayProducts = ({ searching, wantedProductsId, categorySelected, countP
                   <img
                     alt={product.name}
                     src={`https://backendapi.turing.com/images/products/${product.thumbnail}`}
+                    data-id={product.product_id}
+                    onClick={goToProduct}
                   />
                 </figure>
                 <p className="name">{product.name}</p>
@@ -68,14 +79,4 @@ const DisplayProducts = ({ searching, wantedProductsId, categorySelected, countP
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    searching: state.search.searching,
-    wantedProductsId: state.search.wantedProductsId,
-    categorySelected: state.categorySelected,
-    countProducts: state.products.countProducts,
-    products: state.products.products
-  };
-}
-
-export default connect(mapStateToProps, { fetchProductsBySearch, fetchProductsByCategory, selectProduct })(DisplayProducts);
+export default DisplayProducts;

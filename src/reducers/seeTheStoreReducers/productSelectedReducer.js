@@ -3,7 +3,7 @@ import {
   FETCH_CATEGORIES,
   MAKE_A_SEARCH,
   RESET
-} from '../types';
+} from '../../types';
 
 export default (state = 0, action) => {
   switch (action.type) {

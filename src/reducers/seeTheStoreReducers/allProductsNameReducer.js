@@ -1,4 +1,4 @@
-import { FETCH_ALL_PRODUCTS_NAME } from '../types';
+import { FETCH_ALL_PRODUCTS_NAME } from '../../types';
 
 export default (state = [], action) => {
   switch (action.type) {

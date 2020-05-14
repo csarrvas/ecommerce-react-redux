@@ -5,3 +5,4 @@ export const FETCH_ALL_PRODUCTS_NAME = 'FETCH_ALL_PRODUCTS_NAME';
 export const SELECT_A_PRODUCT = 'SELECT_A_PRODUCT';
 export const MAKE_A_SEARCH = 'MAKE_A_SEARCH';
 export const RESET = 'RESET';
+export const LOADING = 'LOADING';

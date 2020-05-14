@@ -1,16 +1,18 @@
 import {
+  SELECT_A_PRODUCT,
   FETCH_CATEGORIES,
   MAKE_A_SEARCH,
   RESET
-} from '../types';
+} from '../../types';
 
-export default (state = 0, action) => {
+export default (state = [], action) => {
   switch (action.type) {
+    case SELECT_A_PRODUCT:
+      return action.payload.allProductReviews;
     case FETCH_CATEGORIES:
-      return action.payload.selectedDepartment;
     case MAKE_A_SEARCH:
     case RESET:
-      return 0;
+      return [];
     default:
       return state;
   }

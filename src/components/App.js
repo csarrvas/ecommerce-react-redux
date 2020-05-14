@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { fetchDepartments, fetchAllProductsName } from '../actions';
+import { fetchDepartments, fetchAllProductsName } from '../actions/seeTheStoreActions';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';

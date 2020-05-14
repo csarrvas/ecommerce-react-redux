@@ -1,4 +1,4 @@
-import { FETCH_DEPARTMENTS } from '../types';
+import { FETCH_DEPARTMENTS } from '../../types';
 
 export default (state = [], action) => {
   switch (action.type) {
