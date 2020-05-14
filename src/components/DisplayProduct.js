@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import './css/cardsStyle.css';
 import './css/displayProduct.css';
 
 const DisplayProduct = ({ product, reviews }) => {

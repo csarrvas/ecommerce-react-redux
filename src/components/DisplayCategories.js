@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { fetchProductsByCategory } from '../actions';
-import './css/displayCategories.css';
+import './css/cardsStyle.css';
 
 const DisplayCategories = ({ categories, fetchProductsByCategory }) => {
   const selectCategory = (e) => {

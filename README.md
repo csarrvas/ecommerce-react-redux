@@ -2,6 +2,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+To generate the .css files you have to run:
+
+### `npm run scss`
+
 In the project directory, you can run:
 
 ### `npm start`

@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { fetchProductsBySearch, fetchProductsByCategory, selectProduct } from '../actions';
 import { printMessage } from '../helpers/ui';
+import './css/cardsStyle.css';
 import './css/displayProducts.css';
 
 const DisplayProducts = ({ searching, wantedProductsId, categorySelected, countProducts, products, fetchProductsBySearch, fetchProductsByCategory, selectProduct }) => {
@@ -61,7 +62,7 @@ const DisplayProducts = ({ searching, wantedProductsId, categorySelected, countP
               {displayPagination(numberOfPages)}
             </div>
           </Fragment>
-        : printMessage('Products not found, try with another category or search', 'error', 'main')
+        : printMessage('Products not found, try with another category or search', 'error')
       }
     </Fragment>
   );

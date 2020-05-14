@@ -6,6 +6,10 @@ import DisplayCategories from './DisplayCategories';
 import DisplayDepartments from './DisplayDepartments';
 
 const Main = ({ departmentSelected, categorySelected, productSelected, searching, categories }) => {
+
+  const error = document.querySelector('#error');
+  if (error) error.remove();
+
   const displayContent = () => {
     if (productSelected !== 0) {
       return <DisplayProduct/>

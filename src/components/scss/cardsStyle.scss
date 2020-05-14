@@ -1,6 +1,9 @@
 @import 'variables';
 
-.category {
+.department,
+.category,
+.product,
+#product {
   width: 90%;
   padding: 10px;
   margin: 20px auto;
@@ -16,6 +19,7 @@
 
   .description {
     font-weight: 300;
+    text-align: justify;
   }
 
   button {
@@ -38,9 +42,5 @@
     &:hover {
       background-color: $inputs_color-plus;
     }
-  }
-
-  &:first-of-type {
-    margin-top: 20px;
   }
 }

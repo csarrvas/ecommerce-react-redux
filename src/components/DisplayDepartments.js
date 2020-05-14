@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { fetchCategories } from '../actions';
-import './css/displayDepartments.css';
+import './css/cardsStyle.css';
 
 const DisplayDepartments = ({ departments, fetchCategories }) => {
   const selectDepartment = (e) => {
