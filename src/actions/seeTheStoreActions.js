@@ -4,7 +4,6 @@ import {
   FETCH_PRODUCTS,
   FETCH_ALL_PRODUCTS_NAME,
   SELECT_A_PRODUCT,
-  MAKE_A_SEARCH,
   RESET,
   LOADING
 } from '../types';
@@ -14,6 +13,7 @@ import {
   getCategories,
   getProductsByCategory,
   getAllProducts,
+  getProduct,
   getProductReviews } from '../apis/turing';
 
 export const fetchDepartments = () => async dispatch => {
@@ -54,8 +54,14 @@ export const fetchProductsByCategory = (categoryId, page) => async dispatch => {
   });
 };
 
-export const fetchProductsBySearch = (wantedProductsId, page) => async dispatch => {
+export const fetchProductsBySearch = (productToSearch, allProductsName, page) => async dispatch => {
   dispatch({ type: LOADING });
+
+  const wantedProducts = allProductsName.filter(product =>
+    product.name.includes(productToSearch) ? product.id : null
+  );
+  const wantedProductsId = wantedProducts.map(product => product.id);
+
   const response = await getAllProducts();
   const products = response.data.rows.filter(product => {
     return wantedProductsId.indexOf(product.product_id) !== -1 ? product : null;
@@ -92,39 +98,15 @@ export const fetchAllProductsName = () => async dispatch => {
 
 export const selectProduct = productId => async dispatch => {
   dispatch({ type: LOADING });
-  const response = await getProductReviews(productId);
+  const response1 = await getProduct(productId)
+  const response2 = await getProductReviews(productId);
   
   dispatch({
     type: SELECT_A_PRODUCT,
     payload: {
       productId: productId,
-      allProductReviews: response.data
-    }
-  });
-};
-
-export const searchProduct = (productToSearch, allProductsName) => async dispatch => {
-  dispatch({ type: LOADING });
-  const wantedProducts = allProductsName.filter(product =>
-    product.name.includes(productToSearch) ? product.id : null
-  );
-  const wantedProductsId = wantedProducts.map(product => product.id);
-
-  const response = await getAllProducts();
-  const products = response.data.rows.filter(product => {
-    return wantedProductsId.indexOf(product.product_id) !== -1 ? product : null;
-  });
-
-  const limitedProducts = products.slice(0, 10);
-  
-  dispatch({
-    type: MAKE_A_SEARCH,
-    payload: {
-      wantedProductsId: wantedProductsId,
-      selectedCategory: 0,
-      countProducts: products.length,
-      products: limitedProducts,
-      actualPage: 1
+      allProductReviews: response2.data,
+      product: response1.data
     }
   });
 };

@@ -1,27 +1,26 @@
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import Spinner from './Spinner';
 import './css/cardsStyle.css';
 
-const DisplayDepartments = ({ departments, fetchCategories }) => {
-  const selectDepartment = (e) => {
-    fetchCategories(parseInt(e.target.getAttribute('data-id')));
-  }
+const DisplayDepartments = ({ departments, loading }) => {
+
   return (
     <Fragment>
-      {departments.map(department =>
+      {loading ? <Spinner/> : departments.map(department =>
         <div
           className="department"
           key={`department-${department.department_id}`}
         >
           <p className="name">{department.name}</p>
           <p className="description">{department.description}</p>
-          <button
-            data-id={department.department_id}
-            onClick={selectDepartment}
-          >Visit this department</button>
+          <Link to={`/categories/inDepartment/${department.department_id}`}>
+            <button>Visit this department</button>
+          </Link>
         </div>
       )}
     </Fragment>
   );
 }
- 
+
 export default DisplayDepartments;

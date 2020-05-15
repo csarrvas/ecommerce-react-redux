@@ -9,21 +9,25 @@ export const getDepartments = () => {
 export const getCategories = (departmentId) => {
   const url = departmentId === 0
     ? '/categories'
-    : `/categories/inDepartment/${departmentId}`;
+    : `/categories/inDepartment/${departmentId}`
   return turing.get(url);
 }
 
 export const getProductsByCategory = (categoryId, page) => {
   const url = categoryId === 0
     ? `/products?page=${page}&limit=10`
-    : `/products/inCategory/${categoryId}?page=${page}&limit=10`;
+    : `/products/inCategory/${categoryId}?page=${page}&limit=10`
   return turing.get(url);
 }
 
-export const getAllProducts = (wantedProductsId, page) => {
-  return turing.get('/products?page=1&limit=200');
+export const getProduct = (productId) => {
+  return turing.get(`/products/${productId}`);
 }
 
 export const getProductReviews = (productId) => {
   return turing.get(`/products/${productId}/reviews`);
+}
+
+export const getAllProducts = () => {
+  return turing.get('/products?page=1&limit=200');
 }

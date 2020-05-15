@@ -1,19 +1,32 @@
-import React, { Fragment } from 'react';
-import { printMessage } from '../helpers/ui';
+import React, { Fragment, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import Spinner from './Spinner';
 import './css/cardsStyle.css';
 import './css/displayProducts.css';
 
 const DisplayProducts = (props) => {
   const {
-    products: productsState,
-    categorySelected,
-    search,
+    match,
+    countProducts,
+    products,
+    allProductsName,
+    loading,
     fetchProductsByCategory,
-    fetchProductsBySearch,
-    selectProduct
-  } = props
-  const { products, countProducts, actualPage } = productsState;
-  const { searching, wantedProductsId } = search
+    fetchProductsBySearch } = props;
+
+  useEffect(() => {
+    match.params.categoryId
+      ? fetchProductsByCategory(parseInt(match.params.categoryId), parseInt(match.params.pageNumber))
+      : fetchProductsBySearch(match.params.searchedWord, allProductsName, parseInt(match.params.pageNumber));
+  },
+    [
+      fetchProductsByCategory,
+      fetchProductsBySearch,
+      match.params.categoryId,
+      match.params.pageNumber,
+      match.params.searchedWord,
+      allProductsName]
+  );
 
   const numberOfPages = countProducts !== 0 ? Math.ceil(countProducts / 10) : 0;
 
@@ -22,58 +35,56 @@ const DisplayProducts = (props) => {
     for (let index = 0; index < numberOfPages; index++) {
       pages.push(index + 1);
     }
+    console.log(1 !== parseInt(match.params.pageNumber));
     return pages.map(page =>
-      <button
+      <Link
         key={`page-${page}`}
-        data-id={page}
-        className={`page ${page === actualPage ? 'selected' : ''}`}
-        onClick={ page !== actualPage ? changePage : null}
-      >
-        {page}
-      </button>
+        to={page !== parseInt(match.params.pageNumber)
+          ? match.params.categoryId
+            ? `/products/inCategory/${match.params.categoryId}/page/${page}`
+            : `/products/search/${match.params.searchedWord}/page/${page}`
+          : '#' }
+        >
+        <button
+          className={`page${page === parseInt(match.params.pageNumber) ? ' selected' : ''}`}
+        >{page}</button>
+      </Link>
     );
   }
-
-  const changePage = (e) => {
-    searching
-      ? fetchProductsBySearch(wantedProductsId, parseInt(e.target.getAttribute('data-id')))
-      : fetchProductsByCategory(categorySelected, parseInt(e.target.getAttribute('data-id')));
-  }
-
-  const goToProduct = (e) => selectProduct(parseInt(e.target.getAttribute('data-id')));
-
+  
   return (
     <Fragment>
-      {countProducts
+      {loading ? <Spinner/> : countProducts
         ? <Fragment>
             {products.map(product =>
               <div
                 className="product"
                 key={`product-${product.product_id}`}
               >
-                <figure>
-                  <img
-                    alt={product.name}
-                    src={`https://backendapi.turing.com/images/products/${product.thumbnail}`}
-                    data-id={product.product_id}
-                    onClick={goToProduct}
-                  />
-                </figure>
+                <Link to={`/products/${product.product_id}`}>
+                  <figure>
+                    <img
+                      alt={product.name}
+                      src={`https://backendapi.turing.com/images/products/${product.thumbnail}`}
+                    />
+                  </figure>
+                </Link>
                 <p className="name">{product.name}</p>
                 <p className="description">{product.description}</p>
                 <p className="price">${product.price}</p>
                 <p className="discounted_price">${product.discounted_price}</p>
-                <button
-                  data-id={product.product_id}
-                  onClick={goToProduct}
-                >Go to this product</button>
+                <Link to={`/products/${product.product_id}`}>
+                  <button>Go to this product</button>
+                </Link>
               </div>
             )}
             <div id="pagination">
               {displayPagination(numberOfPages)}
             </div>
           </Fragment>
-        : printMessage('Products not found, try with another category or search', 'error')
+        : <div id="error" className="error">
+            <p>Products not found, try with another category or search</p>
+          </div>
       }
     </Fragment>
   );

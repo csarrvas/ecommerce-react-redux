@@ -1,5 +1,6 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import { fetchDepartments, fetchAllProductsName } from '../actions/seeTheStoreActions';
 import Header from './Header';
 import Main from './Main';
@@ -13,11 +14,11 @@ const App = ({ fetchDepartments, fetchAllProductsName }) => {
   }, [fetchDepartments, fetchAllProductsName]);
 
   return (
-    <Fragment>
+    <BrowserRouter>
       <Header/>
       <Main/>
       <Footer/>
-    </Fragment>
+    </BrowserRouter>
   );
 }
 

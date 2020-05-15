@@ -9,6 +9,7 @@ import allProductsNameReducer from './seeTheStoreReducers/allProductsNameReducer
 import searchReducer from './seeTheStoreReducers/searchReducer';
 import reviewsReducer from './seeTheStoreReducers/reviewsReducer';
 import loadingReducer from './loadingReducer';
+import productReducer from './seeTheStoreReducers/productReducer';
 
 export default combineReducers({
   departments: departmentsReducer,
@@ -19,6 +20,7 @@ export default combineReducers({
   productSelected: productSelectedReducer,
   allProductsName: allProductsNameReducer,
   search: searchReducer,
+  product: productReducer,
   reviews: reviewsReducer,
   loading: loadingReducer
 });

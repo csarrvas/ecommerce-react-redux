@@ -1,85 +1,90 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import DisplayProduct from './DisplayProduct';
-import DisplayProducts from './DisplayProducts';
-import DisplayCategories from './DisplayCategories';
-import DisplayDepartments from './DisplayDepartments';
-import Spinner from './Spinner';
 import {
-  fetchDepartments,
   fetchCategories,
   fetchProductsByCategory,
   fetchProductsBySearch,
-  searchProduct,
-  selectProduct,
-  reset } from '../actions/seeTheStoreActions';
+  selectProduct } from '../actions/seeTheStoreActions';
+import DisplayDepartments from './DisplayDepartments';
+import DisplayCategories from './DisplayCategories';
+import DisplayProducts from './DisplayProducts';
+import DisplayProduct from './DisplayProduct';
 
 const Main = (props) => {
-
   const {
     departments,
     categories,
     products,
-    departmentSelected,
-    categorySelected,
-    productSelected,
-    search,
+    countProducts,
+    allProductsName,
+    loading,
+    product,
     reviews,
-    loading } = props;
-
-  const {
     fetchCategories,
     fetchProductsByCategory,
     fetchProductsBySearch,
-    selectProduct} = props;
-
-  const error = document.querySelector('#error');
-  if (error) error.remove();
-
-  const displayContent = () => {
-    if (loading) {
-      return <Spinner/>
-    } else if (productSelected !== 0) {
-      return (
-        <DisplayProduct
-          product={products.products.filter(product => product.product_id === productSelected)[0]}
-          reviews={reviews}
-        />
-      );
-
-    } else if (categorySelected !== 0 || search.searching) {
-      return (
-        <DisplayProducts
-          products={products}
-          categorySelected={categorySelected}
-          search={search}
-          fetchProductsByCategory={fetchProductsByCategory}
-          fetchProductsBySearch={fetchProductsBySearch}
-          selectProduct={selectProduct}
-        />
-      );
-
-    } else if (departmentSelected !== -1 && categories.length !== 0) {
-      return (
-        <DisplayCategories
-          categories={categories}
-          fetchProductsByCategory={fetchProductsByCategory}
-        />
-      );
-
-    } else {
-      return (
-        <DisplayDepartments
-          departments={departments}
-          fetchCategories={fetchCategories}
-        />
-      );
-    }
-  }
+    selectProduct
+  } = props
 
   return (
     <main>
-      {displayContent()}
+      <Route
+        path="/departments"
+        render={(props) =>
+          <DisplayDepartments
+            {...props}
+            departments={departments}
+            loading={loading}
+          />}
+      />
+      <Route
+        path="/categories/inDepartment/:departmentId"
+        render={(props) =>
+          <DisplayCategories
+            {...props}
+            categories={categories}
+            loading={loading}
+            fetchCategories={fetchCategories}
+          />}
+      />
+      <Route
+        path="/products/inCategory/:categoryId/page/:pageNumber"
+        render={(props) =>
+          <DisplayProducts
+            {...props}
+            countProducts={countProducts}
+            products={products}
+            allProductsName={allProductsName}
+            loading={loading}
+            fetchProductsByCategory={fetchProductsByCategory}
+            fetchProductsBySearch={fetchProductsBySearch}
+          />}
+      />
+      <Route
+        path="/products/search/:searchedWord/page/:pageNumber"
+        render={(props) =>
+          <DisplayProducts
+            {...props}
+            countProducts={countProducts}
+            products={products}
+            allProductsName={allProductsName}
+            loading={loading}
+            fetchProductsByCategory={fetchProductsByCategory}
+            fetchProductsBySearch={fetchProductsBySearch}
+          />}
+      />
+      <Route
+        path="/products/:productId" exact
+        render={(props) =>
+          <DisplayProduct
+            {...props}
+            product={product}
+            reviews={reviews}
+            loading={loading}
+            selectProduct={selectProduct}
+          />}
+      />
     </main>
   );
 }
@@ -88,21 +93,13 @@ const mapStateToProps = state => {
   return {
     departments: state.departments,
     categories: state.categories,
-    products: state.products,
-    departmentSelected: state.departmentSelected,
-    categorySelected: state.categorySelected,
-    productSelected: state.productSelected,
-    search: state.search,
-    reviews: state.reviews,
-    loading: state.loading
+    products: state.products.products,
+    loading: state.loading,
+    countProducts: state.products.countProducts,
+    allProductsName: state.allProductsName,
+    product: state.product,
+    reviews: state.reviews
   };
 }
 
-export default connect(mapStateToProps, {
-  fetchDepartments,
-  fetchCategories,
-  fetchProductsByCategory,
-  fetchProductsBySearch,
-  searchProduct,
-  selectProduct,
-  reset})(Main);
+export default connect(mapStateToProps, { fetchCategories, fetchProductsByCategory, fetchProductsBySearch, selectProduct })(Main);

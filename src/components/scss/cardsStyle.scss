@@ -22,7 +22,13 @@
     text-align: justify;
   }
 
-  button {
+  >a {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  a>button {
     margin: 16px 0px;
     align-self: center;
     box-shadow: 2px 2px 0px #ccc;
