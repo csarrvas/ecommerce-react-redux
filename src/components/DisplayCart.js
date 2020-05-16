@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import swal from 'sweetalert';
 import './css/displayCart.css';
 
 const DisplayCart = ({ cart, taxes, shippingRegions, shippingRegionDetail, fetchShippingRegionDetail, removeFromCard, cleanCard }) => {
@@ -12,11 +13,47 @@ const DisplayCart = ({ cart, taxes, shippingRegions, shippingRegionDetail, fetch
   }
 
   const removeProduct = (e) => {
-    removeFromCard(parseInt(e.target.value));
+    const product_id = parseInt(e.target.value);
+    swal({
+      title: "Are you sure?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        swal("The product has been deleted!", {
+          icon: "success",
+        });
+        removeFromCard(parseInt(product_id));
+      } else {
+        swal("Operation cancelled");
+      }
+    });
   }
 
   const removeAll = () => {
-    cleanCard();
+    swal({
+      title: "Are you sure?",
+      text: "All products will be removed!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        swal("All products were removed", {
+          icon: "success",
+        });
+        cleanCard();
+      } else {
+        swal("Operation cancelled");
+      }
+    });
+  }
+
+  const order = () => {
+    swal('Warning!', 'This feature has not been implemented yet!', "warning");
   }
   
   const displayProducts = (cart, taxes, shippingRegionDetail) => {
@@ -62,7 +99,7 @@ const DisplayCart = ({ cart, taxes, shippingRegions, shippingRegionDetail, fetch
             <button onClick={removeAll}>Remove All</button>
             {shippingRegionDetail.length > 0
               // ? ReactDOM.createPortal(<button>Order Now!</button>, orderNowDiv.current) /* THE REF orderNowDiv COMES WITH A NULL VALUE??! */
-              ? ReactDOM.createPortal(<button>Order Now!</button>, document.querySelector('#orderNow'))
+              ? ReactDOM.createPortal(<button onClick={order}>Order Now!</button>, document.querySelector('#orderNow'))
               : null
             }
           </div>
@@ -98,11 +135,10 @@ const DisplayCart = ({ cart, taxes, shippingRegions, shippingRegionDetail, fetch
       </div>
       <div id="shipping-regions">
         <p>Shipping options</p>
-        <select onChange={changeShippingRegion}>
+        <select onChange={changeShippingRegion} defaultValue="1">
           {shippingRegions.map(shippingRegion =>
             shippingRegion.shipping_region_id === 1
             ? <option
-                disabled selected
                 key={`shipping-${shippingRegion.shipping_region_id}`}
                 value={shippingRegion.shipping_region_id}
               >{shippingRegion.shipping_region}</option>

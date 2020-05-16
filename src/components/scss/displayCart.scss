@@ -106,6 +106,12 @@
       background-color: #964343;
     }
   }
+
+  #orderNow>button {
+    background-color: #1a9420 !important;
+    padding: 7px 15px;
+    font-size: 1.8rem;
+  }
 }
 
 @media screen and (max-width: 750px) {

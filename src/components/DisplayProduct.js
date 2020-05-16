@@ -1,5 +1,6 @@
 import React, { useEffect, Fragment } from 'react';
 import Spinner from './Spinner';
+import swal from 'sweetalert';
 import './css/cardsStyle.css';
 import './css/displayProduct.css';
 
@@ -10,6 +11,7 @@ const DisplayProduct = ({ product, reviews, loading, match, selectProduct, addTo
   }, [selectProduct, match.params.productId]);
 
   const addProduct = (product) => {
+    swal('','The product was successfully added!','success');
     addToCart(product);
   }
 
