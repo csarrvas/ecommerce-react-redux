@@ -3,11 +3,15 @@ import Spinner from './Spinner';
 import './css/cardsStyle.css';
 import './css/displayProduct.css';
 
-const DisplayProduct = ({ product, reviews, loading, match, selectProduct }) => {
+const DisplayProduct = ({ product, reviews, loading, match, selectProduct, addToCart }) => {
 
   useEffect(() => {
     selectProduct(parseInt(match.params.productId));
   }, [selectProduct, match.params.productId]);
+
+  const addProduct = (product) => {
+    addToCart(product);
+  }
 
   const renderProduct = (product, loading) => {
     if (loading) {
@@ -31,7 +35,7 @@ const DisplayProduct = ({ product, reviews, loading, match, selectProduct }) => 
           <p className="description">{product.description}</p>
           <p className="price">${product.price}</p>
           <p className="discounted_price">${product.discounted_price}</p>
-          <button data-id={product.product_id}>Add to cart!</button>
+          <button data-id={product.product_id} onClick={() => addProduct(product)}>Add to cart!</button>
           <p>--- Reviews ---</p>
           <div id="reviews">
             {reviews.map((review, index) => 

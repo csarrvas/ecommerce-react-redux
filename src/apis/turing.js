@@ -31,3 +31,15 @@ export const getProductReviews = (productId) => {
 export const getAllProducts = () => {
   return turing.get('/products?page=1&limit=200');
 }
+
+export const getTaxes = () => {
+  return turing.get('/tax');
+}
+
+export const getShippingRegions = () => {
+  return turing.get('/shipping/regions');
+}
+
+export const getShippingRegionDetail = (shipping_id) => {
+  return turing.get(`/shipping/regions/${shipping_id}`);
+}

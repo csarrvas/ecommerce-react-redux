@@ -4,7 +4,6 @@ import {
   FETCH_PRODUCTS,
   FETCH_ALL_PRODUCTS_NAME,
   SELECT_A_PRODUCT,
-  RESET,
   LOADING
 } from '../types';
 
@@ -109,10 +108,4 @@ export const selectProduct = productId => async dispatch => {
       product: response1.data
     }
   });
-};
-
-export const reset = () => {
-  return {
-    type: RESET
-  };
 };

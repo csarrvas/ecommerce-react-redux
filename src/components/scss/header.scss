@@ -7,6 +7,11 @@ header {
   align-items: center;
   background: linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(99,99,99,1) 65%, rgba(205,205,205,1) 100%);
 
+  a{
+    text-decoration: none;
+    color: black;
+  }
+
   figure {
     margin: 10px 0px;
     padding: 0px 0px 0px 10px;
@@ -16,6 +21,7 @@ header {
     align-items: center;
     max-width: 75px;
     cursor: pointer;
+    height: 100%;
 
     img {
       width: 100%;
@@ -88,9 +94,18 @@ header {
     justify-content: space-around;
 
     div {
-      padding: 0px 5px;
+      padding: 0px;
       border: 1px solid $inputs-border-color;
       transition-duration: 0.3s;
+
+      a {
+        width: 100%;
+      }
+
+      p {
+        margin: 0px;
+        padding: 16px 5px;
+      }
 
       &:hover {
         cursor: pointer;

@@ -1,7 +1,6 @@
 import {
   SELECT_A_PRODUCT,
-  FETCH_CATEGORIES,
-  RESET
+  FETCH_CATEGORIES
 } from '../../types';
 
 export default (state = {}, action) => {
@@ -9,7 +8,6 @@ export default (state = {}, action) => {
     case SELECT_A_PRODUCT:
       return action.payload.product;
     case FETCH_CATEGORIES:
-    case RESET:
       return {};
     default:
       return state;

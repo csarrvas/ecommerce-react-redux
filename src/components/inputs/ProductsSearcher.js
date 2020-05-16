@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const ProductsSearcher = ({ productsSearcher }) => {
+const ProductsSearcher = () => {
 
   const [ searchedWord, setSearchedWord ] = useState('');
 
@@ -15,7 +15,7 @@ const ProductsSearcher = ({ productsSearcher }) => {
 
   return (
     <form onSubmit={toPreventDefault}>
-      <input ref={productsSearcher} id="search" type="text" placeholder="Search" onChange={onInputChange}/>
+      <input id="search" type="text" placeholder="Search" onChange={onInputChange}/>
       <Link to={`/products/search/${searchedWord}/page/1`}><i className="fas fa-search"></i></Link>
     </form>
   );

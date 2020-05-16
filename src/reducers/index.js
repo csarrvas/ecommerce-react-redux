@@ -6,10 +6,13 @@ import categorySelectedReducer from './seeTheStoreReducers/categorySelectedReduc
 import productsReducer from './seeTheStoreReducers/productsReducer';
 import productSelectedReducer from './seeTheStoreReducers/productSelectedReducer';
 import allProductsNameReducer from './seeTheStoreReducers/allProductsNameReducer';
-import searchReducer from './seeTheStoreReducers/searchReducer';
 import reviewsReducer from './seeTheStoreReducers/reviewsReducer';
 import loadingReducer from './loadingReducer';
 import productReducer from './seeTheStoreReducers/productReducer';
+import cartReducer from './buyReducers/cartReducer';
+import taxesReducer from './buyReducers/taxesReducer';
+import shippingRegionsReducer from './buyReducers/shippingRegionsReducer';
+import shippingRegionDetailReducer from './buyReducers/shippingRegionDetailReducer';
 
 export default combineReducers({
   departments: departmentsReducer,
@@ -19,8 +22,11 @@ export default combineReducers({
   products: productsReducer,
   productSelected: productSelectedReducer,
   allProductsName: allProductsNameReducer,
-  search: searchReducer,
   product: productReducer,
   reviews: reviewsReducer,
-  loading: loadingReducer
+  loading: loadingReducer,
+  cart: cartReducer,
+  taxes: taxesReducer,
+  shippingRegions: shippingRegionsReducer,
+  shippingRegionDetail: shippingRegionDetailReducer
 });

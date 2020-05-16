@@ -1,39 +1,34 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { reset } from '../actions/seeTheStoreActions';
 import Navegation from './inputs/Navegation';
 import ProductsSearcher from './inputs/ProductsSearcher';
+import { Link } from 'react-router-dom';
 import './css/header.css';
 
-const Header = ({ allProductsName, reset }) => {
-  const productsSearcher = React.createRef();
-
-  const login = () => {
-    // create an action to login
-  }
-
-  const reload = () => {
-    productsSearcher.current.value = '';
-    reset();
-  }
+const Header = () => {
 
   return (
     <header>
-      <figure onClick={reload}>
-        <img alt="logo" src="/images/logo.png"/>
+      <figure>
+        <Link to="/">
+          <img alt="logo" src="/images/logo.png"/>
+        </Link>
       </figure>
       <Navegation/>
-      <ProductsSearcher productsSearcher={productsSearcher}/>
+      <ProductsSearcher/>
       <div id="user-actions">
-        <div id="login" onClick={login}>
-          <p>Log in <i className="far fa-user"></i></p>
+        <div id="login">
+          <Link to="/">
+            <p>Log in <i className="far fa-user"></i></p>
+          </Link>
         </div>
         <div id="cart">
-          <p>Cart <i className="fas fa-cart-arrow-down"></i></p>
+          <Link to="/cart">
+            <p>Cart <i className="fas fa-cart-arrow-down"></i></p>
+          </Link>
         </div>
       </div>
     </header>
   );
 }
 
-export default connect(null, { reset })(Header);
+export default Header;

@@ -35,7 +35,7 @@ const DisplayProducts = (props) => {
     for (let index = 0; index < numberOfPages; index++) {
       pages.push(index + 1);
     }
-    console.log(1 !== parseInt(match.params.pageNumber));
+    
     return pages.map(page =>
       <Link
         key={`page-${page}`}
